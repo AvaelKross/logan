@@ -10,6 +10,7 @@ module Logan
     attr_accessor :email_address
     attr_accessor :admin
     attr_accessor :avatar_url
+    attr_accessor :fullsize_avatar_url
     attr_accessor :created_at
     attr_accessor :updated_at
     attr_accessor :url

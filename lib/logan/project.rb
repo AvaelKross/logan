@@ -1,5 +1,6 @@
 require 'logan/HashConstructed'
 require 'logan/todolist'
+require 'logan/topic'
 require 'logan/response_handler'
 
 module Logan
@@ -67,6 +68,11 @@ module Logan
     def todolist(list_id)
       response = Logan::Client.get "/projects/#{@id}/todolists/#{list_id}.json"
       Logan::TodoList.new response.parsed_response.merge({ :project_id => @id })
+    end
+
+    def message(message_id)
+      response = Logan::Client.get "/projects/#{@id}/messages/#{list_id}.json"
+      Logan::TodoList.new response.parsed_response
     end
 
     # create a todo list in this project via Basecamp API
@@ -212,6 +218,16 @@ module Logan
       @todos = handle_response(response, Proc.new {|h| Logan::Todo.new(h.merge({ :project_id => @id })) })
     end
 
+    def topics
+      return @topics if @topics
+      topics!
+    end
+
+    def topics
+      response = Logan::Client.get "/projects/#{@id}/topics.json"
+
+      @topics = handle_response(response, Proc.new {|h| Logan::Topic.new(h.merge({ :project_id => @id })) })
+    end
 
   end
 end

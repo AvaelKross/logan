@@ -11,6 +11,8 @@ module Logan
     attr_accessor :content
     attr_accessor :completed
     attr_accessor :comments_count
+    attr_accessor :created_at
+    attr_accessor :updated_at
     attr_reader :assignee
     attr_accessor :due_at
     attr_accessor :position
@@ -22,7 +24,7 @@ module Logan
     def initialize h
       super
 
-      unless app_url.nil? || app_url.blank?
+      unless app_url.nil? || app_url.empty?
         @project_id ||= app_url[/projects\/(\d*)\//, 1].to_i
       end
 
