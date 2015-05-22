@@ -71,8 +71,18 @@ module Logan
     end
 
     def message(message_id)
-      response = Logan::Client.get "/projects/#{@id}/messages/#{list_id}.json"
-      Logan::TodoList.new response.parsed_response
+      response = Logan::Client.get "/projects/#{@id}/messages/#{message_id}.json"
+      Logan::Message.new response.parsed_response
+    end
+
+    def todo(todo_id)
+      response = Logan::Client.get "/projects/#{@id}/todos/#{todo_id}.json"
+      Logan::Todo.new response.parsed_response.merge({ :project_id => @id })
+    end
+
+    def document(document_id)
+      response = Logan::Client.get "/projects/#{@id}/documents/#{document_id}.json"
+      Logan::Document.new response.parsed_response
     end
 
     # create a todo list in this project via Basecamp API

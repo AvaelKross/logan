@@ -98,6 +98,26 @@ module Logan
       person
     end
 
+    def message(project_id, message_id)
+      response = Logan::Client.get "/projects/#{project_id}/messages/#{message_id}.json"
+      Logan::Message.new response.parsed_response
+    end
+
+    def todo(project_id, todo_id)
+      response = Logan::Client.get "/projects/#{project_id}/todos/#{todo_id}.json"
+      Logan::Todo.new response.parsed_response.merge({ :project_id => project_id })
+    end
+
+    def todolist(project_id, todolist_id)
+      response = Logan::Client.get "/projects/#{project_id}/todolists/#{todolist_id}.json"
+      Logan::TodoList.new response.parsed_response.merge({ :project_id => project_id })
+    end
+
+    def document(project_id, document_id)
+      response = Logan::Client.get "/projects/#{project_id}/documents/#{document_id}.json"
+      Logan::Document.new response.parsed_response
+    end
+
     private
       def all_projects
         response = self.class.get '/projects.json'
