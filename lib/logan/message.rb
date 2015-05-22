@@ -9,9 +9,23 @@ module Logan
     attr_accessor :content
     attr_accessor :private
     attr_accessor :trashed
-    attr_accessor :subscribers
-    attr_accessor :creator
-    attr_accessor :comments
+    attr_reader :subscribers
+    attr_reader :creator
+    attr_reader :comments
+
+    # Sets the creator for this message
+    #
+    # @param [Object] creator person hash from API or <Logan::Person> object
+    def creator=(creator)
+      @creator = creator.is_a?(Hash) ? Logan::Person.new(creator) : creator
+    end
+
+    # Sets subscribers for this message
+    #
+    # @param [Object] subscribers person hash from API or <Logan::Person> object
+    def subscribers=(subscribers_array)
+      @subscribers = subscribers_array.map { |obj| obj = Logan::Person.new obj if obj.is_a?(Hash) }
+    end
 
     def refresh
       response = Logan::Client.get "/projects/#{@project_id}/messages/#{@id}.json"

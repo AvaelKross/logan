@@ -6,17 +6,13 @@ module Logan
 
     attr_accessor :id
     attr_accessor :title
-    attr_accessor :content
     attr_accessor :created_at
     attr_accessor :updated_at
     attr_accessor :url
     attr_accessor :app_url
     attr_accessor :trashed
     attr_accessor :private
-    attr_reader :bucket
-    attr_reader :last_updater
-    attr_reader :creator
-    attr_reader :subscribers
+    attr_accessor :bucket
 
     def refresh
       response = Logan::Client.get "/projects/#{@project_id}/documents/#{@id}.json"

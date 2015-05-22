@@ -15,6 +15,7 @@ module Logan
     attr_accessor :url
     attr_writer :remaining_todos
     attr_writer :completed_todos
+    attr_reader :creator
 
     # intializes a todo list by calling the HashConstructed initialize method and
     # setting both @remaining_todos and @completed_todos to empty arrays
@@ -117,6 +118,13 @@ module Logan
     # @return [HTTParty::response] response from Basecamp for delete request
     def delete_todo(todo)
       response = Logan::Client.delete "/projects/#{@project_id}/todos/#{todo.id}.json"
+    end
+
+    # Sets the creator for this todolist
+    #
+    # @param [Object] creator person hash from API or <Logan::Person> object
+    def creator=(creator)
+      @creator = creator.is_a?(Hash) ? Logan::Person.new(creator) : creator
     end
 
     # returns the array of comments - potentially synchronously downloaded from API

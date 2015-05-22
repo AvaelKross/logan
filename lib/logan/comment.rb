@@ -22,7 +22,7 @@ module Logan
       }.to_json
     end
 
-    # sets the creator for this todo
+    # Sets the creator for this comment
     #
     # @param [Object] creator person hash from API or <Logan::Person> object
     def creator=(creator)

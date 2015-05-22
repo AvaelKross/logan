@@ -13,9 +13,9 @@ module Logan
     attr_accessor :comments_count
     attr_accessor :created_at
     attr_accessor :updated_at
-    attr_accessor :assignee
-    attr_accessor :todolist
-    attr_accessor :creator
+    attr_reader :assignee
+    attr_reader :todolist
+    attr_reader :creator
     attr_accessor :due_at
     attr_accessor :position
     attr_accessor :app_url
@@ -67,6 +67,28 @@ module Logan
       initialize(response.parsed_response)
     end
 
+    # sets the assignee for this todo
+    #
+    # @param [Object] assignee person hash from API or <Logan::Person> object
+    # @return [Logan::Person] the assignee for this todo
+    def assignee=(assignee)
+      @assignee = assignee.is_a?(Hash) ? Logan::Person.new(assignee) : assignee
+    end
+
+    # Sets the creator for this todo
+    #
+    # @param [Object] creator person hash from API or <Logan::Person> object
+    def creator=(creator)
+      @creator = creator.is_a?(Hash) ? Logan::Person.new(creator) : creator
+    end
+
+    # Sets the todolist for this todo
+    #
+    # @param [Object] todolist hash from API or <Logan::TodoList> object
+    def todolist=(todolist)
+      @todolist = todolist.is_a?(Hash) ? Logan::TodoList.new(todolist) : todolist
+    end
+
     # returns the array of comments - potentially synchronously downloaded from API
     #
     # @return [Array<Logan::Comment] Array of comments on this todo
@@ -81,14 +103,6 @@ module Logan
     # @return [Array<Logan::Comment>] array of comments for this todo
     def comments=(comment_array)
       @comments = comment_array.map { |obj| obj = Logan::Comment.new obj if obj.is_a?(Hash) }
-    end
-
-    # sets the assignee for this todo
-    #
-    # @param [Object] assignee person hash from API or <Logan::Person> object
-    # @return [Logan::Person] the assignee for this todo
-    def assignee=(assignee)
-      @assignee = assignee.is_a?(Hash) ? Logan::Person.new(assignee) : assignee
     end
 
     # create a create in this todo list via the Basecamp API
