@@ -13,7 +13,9 @@ module Logan
     attr_accessor :comments_count
     attr_accessor :created_at
     attr_accessor :updated_at
-    attr_reader :assignee
+    attr_accessor :assignee
+    attr_accessor :todolist
+    attr_accessor :creator
     attr_accessor :due_at
     attr_accessor :position
     attr_accessor :app_url
