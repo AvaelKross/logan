@@ -16,6 +16,7 @@ module Logan
     attr_writer :remaining_todos
     attr_writer :completed_todos
     attr_reader :creator
+    attr_reader :comments
 
     # intializes a todo list by calling the HashConstructed initialize method and
     # setting both @remaining_todos and @completed_todos to empty arrays
@@ -125,14 +126,6 @@ module Logan
     # @param [Object] creator person hash from API or <Logan::Person> object
     def creator=(creator)
       @creator = creator.is_a?(Hash) ? Logan::Person.new(creator) : creator
-    end
-
-    # returns the array of comments - potentially synchronously downloaded from API
-    #
-    # @return [Array<Logan::Comment] Array of comments on this todo
-    def comments
-      refresh if (@comments.nil? || @comments.empty?) && @comments_count > 0
-      @comments ||= Array.new
     end
 
     # assigns the {#comments} from the passed array

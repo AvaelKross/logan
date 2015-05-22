@@ -13,18 +13,11 @@ module Logan
     attr_accessor :trashed
     attr_accessor :private
     attr_accessor :bucket
+    attr_reader :comments
 
     def refresh
       response = Logan::Client.get "/projects/#{@project_id}/documents/#{@id}.json"
       initialize(response.parsed_response)
-    end
-
-    # returns the array of comments - potentially synchronously downloaded from API
-    #
-    # @return [Array<Logan::Comment] Array of comments on this todo
-    def comments
-      refresh if (@comments.nil? || @comments.empty?) && @comments_count > 0
-      @comments ||= Array.new
     end
 
     # assigns the {#comments} from the passed array

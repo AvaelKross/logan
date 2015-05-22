@@ -32,14 +32,6 @@ module Logan
       initialize(response.parsed_response)
     end
 
-    # returns the array of comments - potentially synchronously downloaded from API
-    #
-    # @return [Array<Logan::Comment] Array of comments on this todo
-    def comments
-      refresh if (@comments.nil? || @comments.empty?) && @comments_count > 0
-      @comments ||= Array.new
-    end
-
     # assigns the {#comments} from the passed array
     #
     # @param [Array<Object>] comment_array array of hash comments from API or <Logan::Comment> objects
