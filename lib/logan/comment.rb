@@ -22,6 +22,16 @@ module Logan
       }.to_json
     end
 
+    def create(project_id, object_type, object_id)
+      post_params = {
+        :body => self.post_json,
+        :headers => Logan::Client.headers.merge({'Content-Type' => 'application/json'})
+      }
+
+      response = Logan::Client.post "/projects/#{project_id}/#{object_type}s/#{object_id}/comments.json", post_params
+      Logan::Comment.new response
+    end
+
     # Sets the creator for this comment
     #
     # @param [Object] creator person hash from API or <Logan::Person> object
