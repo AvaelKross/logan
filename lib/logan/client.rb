@@ -118,6 +118,16 @@ module Logan
       Logan::Document.new response.parsed_response
     end
 
+    def upload(project_id, document_id)
+      response = Logan::Client.get "/projects/#{project_id}/uploads/#{document_id}.json"
+      Logan::Upload.new response.parsed_response
+    end
+
+    def calendar_event(project_id, document_id)
+      response = Logan::Client.get "/projects/#{project_id}/calendar_events/#{document_id}.json"
+      Logan::CalendarEvent.new response.parsed_response
+    end
+
     private
       def all_projects
         response = self.class.get '/projects.json'
