@@ -16,6 +16,7 @@ module Logan
     attr_reader :assignee
     attr_reader :todolist
     attr_reader :creator
+    attr_reader :completer
     attr_accessor :due_at
     attr_accessor :position
     attr_accessor :app_url
@@ -80,6 +81,13 @@ module Logan
     # @param [Object] creator person hash from API or <Logan::Person> object
     def creator=(creator)
       @creator = creator.is_a?(Hash) ? Logan::Person.new(creator) : creator
+    end
+
+    # Sets the completer for this todo
+    #
+    # @param [Object] completer person hash from API or <Logan::Person> object
+    def completer=(completer)
+      @completer = completer.is_a?(Hash) ? Logan::Person.new(completer) : completer
     end
 
     # Sets the todolist for this todo
