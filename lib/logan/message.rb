@@ -6,6 +6,8 @@ module Logan
 
     attr_accessor :id
     attr_accessor :subject
+    attr_accessor :created_at
+    attr_accessor :updated_at
     attr_accessor :content
     attr_accessor :private
     attr_accessor :trashed

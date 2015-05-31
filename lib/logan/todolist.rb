@@ -9,12 +9,16 @@ module Logan
     attr_accessor :project_id
     attr_accessor :name
     attr_accessor :description
+    attr_accessor :created_at
+    attr_accessor :updated_at
+    attr_accessor :url
+    attr_accessor :app_url
     attr_accessor :completed
     attr_accessor :remaining_count
     attr_accessor :completed_count
-    attr_accessor :url
     attr_writer :remaining_todos
     attr_writer :completed_todos
+    attr_accessor :trashed_todos
     attr_reader :creator
     attr_reader :comments
 
@@ -23,6 +27,7 @@ module Logan
     def initialize(h)
       @remaining_todos = []
       @completed_todos = []
+      @trashed_todos = []
       super
     end
 
@@ -72,6 +77,7 @@ module Logan
     # @return [Array<Logan::Todo>] array of remaining and completed todos for this list
     def todos=(todo_hash)
       @remaining_todos = todo_hash['remaining'].map { |h| Logan::Todo.new h.merge({ :project_id => @project_id }) }
+      @completed_todos = todo_hash['completed'].map { |h| Logan::Todo.new h.merge({ :project_id => @project_id }) }
       @completed_todos = todo_hash['completed'].map { |h| Logan::Todo.new h.merge({ :project_id => @project_id }) }
       return @remaining_todos + @completed_todos
     end
