@@ -235,15 +235,9 @@ module Logan
       @todos = handle_response(response, Proc.new {|h| Logan::Todo.new(h.merge({ :project_id => @id })) })
     end
 
-    def topics
-      return @topics if @topics
-      topics!
-    end
-
-    def topics
+    def all_topics
       response = Logan::Client.get "/projects/#{@id}/topics.json"
-
-      @topics = handle_response(response, Proc.new {|h| Logan::Topic.new(h.merge({ :project_id => @id })) })
+      @all_topics = handle_response(response, Proc.new {|h| Logan::Topic.new(h.merge({ :project_id => @id })) })
     end
 
   end
