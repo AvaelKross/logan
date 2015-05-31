@@ -13,6 +13,7 @@ module Logan
     attr_accessor :comments_count
     attr_accessor :created_at
     attr_accessor :updated_at
+    attr_accessor :completed_at
     attr_reader :assignee
     attr_reader :todolist
     attr_reader :creator
