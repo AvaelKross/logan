@@ -21,6 +21,13 @@ module Logan
     attr_accessor :draft
     attr_accessor :is_client_project
     attr_accessor :color
+    attr_accessor :creator
+    attr_writer :accesses
+    attr_accessor :attachments
+    attr_accessor :calendar_events
+    attr_accessor :documents
+    attr_accessor :topics
+    attr_writer :todolists
 
     # get active todo lists for this project from Basecamp API
     #

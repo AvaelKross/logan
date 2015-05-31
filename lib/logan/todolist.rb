@@ -16,9 +16,9 @@ module Logan
     attr_accessor :completed
     attr_accessor :remaining_count
     attr_accessor :completed_count
+    attr_accessor :trashed_todos
     attr_writer :remaining_todos
     attr_writer :completed_todos
-    attr_accessor :trashed_todos
     attr_reader :creator
     attr_reader :comments
 
