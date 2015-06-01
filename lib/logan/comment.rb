@@ -11,6 +11,7 @@ module Logan
     attr_accessor :trashed
     attr_accessor :private
     attr_accessor :subscribers
+    attr_accessor :attachments
     attr_reader :creator
 
     def post_json
