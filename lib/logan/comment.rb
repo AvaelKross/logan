@@ -19,6 +19,7 @@ module Logan
         :content => @content,
         :trashed => @trashed,
         :private => @private,
+        :attachments => @attachments,
         :creator => @creator.nil? ? nil : @creator.to_hash
       }.to_json
     end

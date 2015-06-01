@@ -1,6 +1,7 @@
 require 'httparty'
 require 'json'
 
+require 'logan/attachment'
 require 'logan/comment'
 require 'logan/client'
 require 'logan/document'
