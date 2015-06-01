@@ -11,6 +11,7 @@ module Logan
     attr_accessor :content
     attr_accessor :private
     attr_accessor :trashed
+    attr_accessor :attachments
     attr_reader :subscribers
     attr_reader :creator
     attr_reader :comments
