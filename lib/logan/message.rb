@@ -16,6 +16,26 @@ module Logan
     attr_reader :creator
     attr_reader :comments
 
+    def post_json
+      {
+        :subject => @subject
+        :content => @content,
+        :trashed => @trashed,
+        :private => @private,
+        :attachments => @attachments
+      }.to_json
+    end
+
+    def create(project_id)
+      post_params = {
+        :body => self.post_json,
+        :headers => Logan::Client.headers.merge({'Content-Type' => 'application/json'})
+      }
+
+      response = Logan::Client.post "/projects/#{project_id}/messages.json", post_params
+      Logan::Message.new response
+    end
+
     # Sets the creator for this message
     #
     # @param [Object] creator person hash from API or <Logan::Person> object
