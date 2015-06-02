@@ -18,7 +18,7 @@ module Logan
 
     def post_json
       {
-        :subject => @subject
+        :subject => @subject,
         :content => @content,
         :trashed => @trashed,
         :private => @private,
